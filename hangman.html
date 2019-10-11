@@ -5,11 +5,69 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Hangman!</title>
 </head>
 
 <body>
+    <h1>Hangman!</h1>
 
+    <script>
+        // Create array of words
+        var words = [
+            "javascript",
+            "monkey",
+            "amazing",
+            "pancake",
+            "apple",
+            "coding",
+            "blue",
+            "cheesecake",
+            "banana",
+            "snake"
+        ];
+
+        // Pick a random word
+        var word = words[Math.floor(Math.random() * words.length)];
+
+        // Set up the answer array
+        var answerArray = [];
+        for (var i = 0; i < word.length; i++) {
+            answerArray[i] = "_";
+        }
+
+        var remainingLetters = word.length;
+
+        // The game loop
+        while (remainingLetters > 0) {
+            // Show players progress
+            alert(answerArray.join(" "));
+            // Get guess from player
+            var guess = prompt("Guess a letter, or click Cancel to exit the game.").toLowerCase();
+            // Save and show players guessed letters
+            // var guessedLetters = [];
+            // guessedLetters.push(guess);
+            // alert("These are the letters you've already guessed: " + guessedLetters);
+            if (guess === null) {
+                // Exit game loop
+                break;
+            } else if (guess.length !== 1) {
+                alert("Please enter a single letter.");
+            } else {
+                // Update game state with players guess
+                for (var j = 0; j < word.length; j++) {
+                    if (word[j] === guess) {
+                        answerArray[j] = guess;
+                        remainingLetters--;
+                    }
+                }
+            }
+            // End of game loop
+        }
+
+        // Show answer and congratulate player
+        alert(answerArray.join(" "));
+        alert("Good job! The answer was " + word);
+    </script>
 </body>
 
 </html>
